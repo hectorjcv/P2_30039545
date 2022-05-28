@@ -6,7 +6,7 @@ const http=require('http');
 const path = require('path');
 
 
-const db=path.join(__dirname,"database","basededatos.db");
+const db=path.join(__dirname,"db","bd.db");
 const db_run=new sqlite3.Database(db, err =>{ 
 if (err){
 	return console.error(err.message);
