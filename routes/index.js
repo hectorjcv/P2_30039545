@@ -1,14 +1,12 @@
 var express = require('express');
 var router = express.Router();
+const geoip = require('geoip-lite');
 const sqlite3=require('sqlite3').verbose();
 const http=require('http');
 const path = require('path');
-const geoip = require('geoip-lite');
 
 
-
-
-const db=path.join(__dirname,"db","bd.db");
+const db=path.join(__dirname,"database","basededatos.db");
 const db_run=new sqlite3.Database(db, err =>{ 
 if (err){
 	return console.error(err.message);
@@ -17,10 +15,10 @@ if (err){
 }
 })
 
-const crear="CREATE TABLE IF NOT EXISTS contacts(email VARCHAR(16),nombre VARCHAR(16), comentario TEXT,fecha DATATIME,ip VARCHAR(15), country VARCHAR(15));";
+const crear="CREATE TABLE IF NOT EXISTS contacts(email VARCHAR(16),nombre VARCHAR(16), comentario TEXT,fecha DATATIME,ip VARCHAR(15), country VARCHAR(20));";
 
 
- 
+
 db_run.run(crear,err=>{
 	if (err){
 	return console.error(err.message);
@@ -60,7 +58,7 @@ router.post('/',(req,res)=>{
   	}
 	let geo = geoip.lookup(ip);
 	let country = geo.country;
-	const sql = "INSERT INTO contacts(email, nombre, comentario, fecha,ip,country) VALUES (?,?,?,?,?,?)";
+	const sql="INSERT INTO contacts(email, nombre, comentario, fecha,ip,country) VALUES (?,?,?,?,?,?)";
 	const nuevos_mensajes=[req.body.email, req.body.nombre, req.body.comentario,fech,ip,country];
 	db_run.run(sql, nuevos_mensajes, err =>{
 	if (err){
