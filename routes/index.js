@@ -59,7 +59,7 @@ router.post('/',(req,res)=>{
   	}
 	let geo = geoip.lookup(ip);
 	let country = geo.country;
-	let pais = county;
+	let pais = country;
 	const sql="INSERT INTO contacts(email, nombre, comentario, fecha,ip,pais) VALUES (?,?,?,?,?,?)";
 	const nuevos_mensajes=[req.body.email, req.body.nombre, req.body.comentario,fech,ip,pais];
 	db_run.run(sql, nuevos_mensajes, err =>{
