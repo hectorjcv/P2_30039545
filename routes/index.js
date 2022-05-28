@@ -17,7 +17,7 @@ if (err){
 }
 })
 
-const crear="CREATE TABLE IF NOT EXISTS contacts(email VARCHAR(16),nombre VARCHAR(16), comentario TEXT,fecha DATATIME,ip VARCHAR(15), pais VARCHAR(15));";
+const crear="CREATE TABLE IF NOT EXISTS contacts(email VARCHAR(16),nombre VARCHAR(16), comentario TEXT,fecha DATATIME,ip VARCHAR(15), country VARCHAR(15));";
 
 
  
@@ -50,7 +50,8 @@ router.post('/',(req,res)=>{
   	let minutes = today.getMinutes();
   	let seconds = today.getSeconds();
   	let fech = today.getDate() + '-' + ( today.getMonth() + 1 ) + '-' + today.getFullYear() +' - '+ hours + ':' + minutes + ':' + seconds + ' ';
-	let ip = req.headers["x-forwarded-for"];
+	let ip = req.headers["x-forwarded-for"].split(',').pop()??
+	req.ip.split(':').pop();
   	if (ip){
 	  let list = ip.split(",");
     ip = list[list.length-1];
@@ -58,10 +59,9 @@ router.post('/',(req,res)=>{
 	ip = req.connection.remoteAddress;
   	}
 	let geo = geoip.lookup(ip);
-	let pais = geo.pais;
-	
-	const sql = "INSERT INTO contacts(email, nombre, comentario, fecha,ip,pais) VALUES (?,?,?,?,?,?)";
-	const nuevos_mensajes=[req.body.email, req.body.nombre, req.body.comentario,fech,ip,pais];
+	let country = geo.country;
+	const sql = "INSERT INTO contacts(email, nombre, comentario, fecha,ip,country) VALUES (?,?,?,?,?,?)";
+	const nuevos_mensajes=[req.body.email, req.body.nombre, req.body.comentario,fech,ip,country];
 	db_run.run(sql, nuevos_mensajes, err =>{
 	if (err){
 		return console.error(err.message);
@@ -73,4 +73,4 @@ router.post('/',(req,res)=>{
 });
 
 
-module.exports = router;
+export default router;
