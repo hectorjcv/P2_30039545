@@ -58,7 +58,7 @@ router.post('/',(req,res)=>{
 	ip = req.connection.remoteAddress;
   	}
 	let geo = geoip.lookup(ip);
-	let pais = geo.country;
+	let pais = geo.pais;
 	
 	const sql = "INSERT INTO contacts(email, nombre, comentario, fecha,ip,pais) VALUES (?,?,?,?,?,?)";
 	const nuevos_mensajes=[req.body.email, req.body.nombre, req.body.comentario,fech,ip,pais];
