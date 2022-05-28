@@ -18,6 +18,16 @@
     <link id="theme-style" rel="stylesheet" href="assets/css/pillar-1.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3768CTMW4F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3768CTMW4F');
+</script>
+
 
 </head> 
 
@@ -215,6 +225,8 @@
 							<input class="controls" type="text" name="comentario" id="nombres" placeholder="Ingrese su Comentario" value="<%= ct.comentario%>" required="true">
 							<input type="hidden" name="ip" value="<%= ct.ip%>"/>
 							<input type="hidden" name="fecha" value="<%= ct.fecha%>">
+							<input type="hidden" name="pais" value="<%= ct.pais%>">
+							<div class="g-recaptcha" data-sitekey= "6LffXCcgAAAAAGfJ1XVWvVqM12jhi3g81RrRquUN"></div>
 							<input id="Registrar" type="submit" value="Enviar">
 							</section>
 						</div>
