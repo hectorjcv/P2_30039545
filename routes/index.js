@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const geoip = require('geoip-lite');
 const sqlite3=require('sqlite3').verbose();
 const http=require('http');
 const path = require('path');
-
+const geoip = require('geoip-lite');
 
 const db=path.join(__dirname,"db","bd.db");
 const db_run=new sqlite3.Database(db, err =>{ 
