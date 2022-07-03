@@ -124,7 +124,7 @@ router.post('/',(req,res)=>{
 		  });
 			  
 			  const recibir_transmitir = {
-				  from: process.env.EMAIL,
+				  from: process.env.CORREO,
 				  to: 'programacion2ais@dispostable.com',
 				  subject: 'Informacion del Contacto', 
 				  html:`
