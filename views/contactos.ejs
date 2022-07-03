@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="theme-style" rel="stylesheet" href="assets/css/pillar-1.css">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+    <h1 align="center">Clientes</h1>
+    <br>
+        <table class="table table-bordered">
+        <thead>
+        <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Nombre </th>
+        <th scope="col">Comentario </th>
+        <th scope="col" style="position:relative; left:19px">Fecha   -   Hora </th> 
+        <th scope="col">IP </th>   
+        <th scope="col">Pais </th>    
+        </tr>
+        </thead>
+        <tbody>
+        <% for (const producto of ct) { %>
+        <tr> 
+        <td><%= producto.email%></td>
+        <td><%= producto.nombre%></td>
+        <td><%= producto.comentario%></td>
+        <td><%= producto.fecha%></td>
+        <td><%= producto.ip%></td>
+        <td><%= producto.country%></td>
+        </tr>
+        <% } %>
+        </tbody>
+        </table>
+</body>
+</html>
